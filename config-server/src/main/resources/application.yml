@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: configServer
+  cloud:
+    config:
+      server:
+        native:
+          search-locations:
+            - file://d:/
+        git:
+          uri: https://github.com/qq547760388/

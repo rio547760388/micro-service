@@ -1,0 +1,55 @@
+server:
+  port: 8093
+spring:
+  application:
+    name: userService
+  #datasource
+  datasource:
+    druid:
+      url: jdbc:mysql://localhost:3306/tian?useSSL=false&characterEncoding=UTF-8&useUnicode=true
+      username: tian
+      password: tian1990
+      initial-size: 10
+      max-active: 100
+      min-idle: 10
+      max-wait: 60000
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+      filter:
+        stat:
+          log-slow-sql: true
+          slow-sql-millis: 1000
+          merge-sql: false
+        wall:
+          config:
+            multi-statement-allow: true
+      default-auto-commit: false
+  #JPA
+  jpa:
+    #show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        use_sql_comments: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8092/eureka
+
+management:
+  endpoint:
+    hystrix:
+      stream:
+        enabled: true

@@ -1,0 +1,17 @@
+server:
+  port: 8094
+spring:
+  application:
+    name: consumer
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8092/eureka
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream
+
