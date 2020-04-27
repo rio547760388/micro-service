@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.tian</groupId>
-	<artifactId>micro-service</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>micro-service</name>
-	<description>micro service</description>
+    <groupId>com.tian</groupId>
+    <artifactId>micro-service</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>micro-service</name>
+    <description>micro service</description>
     <packaging>pom</packaging>
 
     <modules>
@@ -19,8 +19,65 @@
         <module>user-service</module>
     </modules>
 
-	<build>
-		<plugins>
+    <properties>
+        <java.version>1.8</java.version>
+        <spring-cloud.version>Hoxton.SR3</spring-cloud.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.test.skip>true</maven.test.skip>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- spring boot -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-parent</artifactId>
+                <version>2.2.6.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!--spring cloud-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>1.18.12</version>
+                <optional>true</optional>
+            </dependency>
+
+            <!--datasource-->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>8.0.19</version>
+                <scope>runtime</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>1.1.17</version>
+            </dependency>
+
+            <!--test-->
+            <dependency>
+                <groupId>io.projectreactor</groupId>
+                <artifactId>reactor-test</artifactId>
+                <version>3.3.4.RELEASE</version>
+                <scope>test</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-clean-plugin</artifactId>
@@ -40,11 +97,21 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.2</version>
-                <configuration>
-                    <skipTests>true</skipTests>
-                </configuration>
+                <!--<configuration>
+                     <skipTests>true</skipTests>
+                 </configuration>-->
             </plugin>
         </plugins>
-	</build>
+
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>2.2.6.RELEASE</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 
 </project>
