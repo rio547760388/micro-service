@@ -5,12 +5,12 @@
 	<parent>
         <groupId>com.tian</groupId>
         <artifactId>micro-service</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0.0-SNAPSHOT</version>
 	</parent>
 	<groupId>com.tian</groupId>
 	<artifactId>registry-center</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>registryCenter</name>
+	<name>registry-center</name>
 	<description>registry center</description>
 
 	<dependencies>
