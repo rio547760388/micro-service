@@ -6,7 +6,7 @@ spring:
   #datasource
   datasource:
     druid:
-      url: jdbc:mysql://localhost:3306/tian?useSSL=false&characterEncoding=UTF-8&useUnicode=true
+      url: jdbc:mysql://localhost:3306/MS?useSSL=false&characterEncoding=UTF-8&useUnicode=true
       username: tian
       password: tian1990
       initial-size: 10

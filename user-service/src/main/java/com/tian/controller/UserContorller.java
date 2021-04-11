@@ -1,6 +1,13 @@
 package com.tian.controller;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.querydsl.jpa.impl.JPAQueryFactory;
+import com.tian.bean.QUserDO;
+import com.tian.bean.UserDO;
+import com.tian.dao.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,15 +23,20 @@ import java.util.Map;
 @RestController
 public class UserContorller {
 
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    JPAQueryFactory jpaQueryFactory;
+
     @GetMapping("users")
     @HystrixCommand(fallbackMethod = "userFallbakc")
     public Object user() {
-        Map<String, Object> map = new HashMap<>();
-        map.put("userId", 1);
-        map.put("userName", "Rio");
+        QUserDO qUserDO = QUserDO.userDO;
+        Page<UserDO> users = userRepository.findAll(qUserDO.username.eq("rio"), Pageable.unpaged());
 
-        //int a = 1/0;
-        return map;
+        jpaQueryFactory.from(qUserDO).fetch();
+        return users;
     }
 
     public Object userFallbakc() {

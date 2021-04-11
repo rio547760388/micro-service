@@ -1,6 +1,11 @@
 package com.tian.controller;
 
+import com.tian.dao.OrderInfoRepository;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -14,11 +19,16 @@ import java.util.Map;
  * 说明：
  */
 @RestController
+@Slf4j
 public class OrderController {
+
+    @Autowired
+    private OrderInfoRepository orderInfoRepository;
+    
 
     @GetMapping("orders")
     public List<Map<String, Object>> orders() {
-        List<Map<String, Object>> list = new ArrayList();
+        List<Map<String, Object>> list = new ArrayList<>();
         Map<String, Object> map = new HashMap<>();
         map.put("userId", 1);
         map.put("productName", "Iphone 11");
